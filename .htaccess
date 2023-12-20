@@ -1,0 +1,44 @@
+
+RewriteEngine On
+
+# Main Navigation
+# This will show a number but it will not give away the column name in your table
+# To have cleaner URL's is is better to use a framework
+
+# In PHP, the [L] flag at the end of a RewriteRule is used in conjunction with the Apache 
+# mod_rewrite module.
+
+# The [L] flag stands for "last" and is used to indicate that the current rule should 
+# be the last one applied if it matches. When mod_rewrite processes a URL, it goes through all of the RewriteRules in order, and if a rule matches, it will apply the corresponding rewrite and start over again with the modified URL.
+
+# By using the [L] flag, you can tell mod_rewrite to stop processing rules if the current
+#  rule matches, effectively preventing any further rewrites from being applied. 
+#  This can be useful in situations where you have multiple RewriteRules that could 
+#  potentially match a URL, but you only want one of them to be applied.
+
+# General rewrite
+RewriteRule ^welcome$ index.php [L]
+RewriteRule ^login$ pages/Login.php [L]
+RewriteRule ^adminlogin$ pages/AdminLogin.php [L]
+RewriteRule ^logout$ pages/Logout.php [L]
+RewriteRule ^register$ pages/Register.php [L]
+
+# User Navigation
+RewriteRule ^s/dashboard$ pages/student/Dashboard.php [L]
+RewriteRule ^s/course$ pages/student/MyCourse.php [L]
+RewriteRule ^s/account$ pages/student/MyDetails.php [L]
+RewriteRule ^s/comment$ pages/student/Comment.php [L]
+
+
+# admin Navigation
+RewriteRule ^a/dashboard$ pages/admin/Dashboard.php [L]
+RewriteRule ^a/allStudents$ pages/admin/AllStudents.php [L]
+# RewriteRule ^a/view/([0-9]+)$ pages/admin/edit_view_students.php?student_num=$1 [L]
+
+# shared
+RewriteRule ^events$ pages/shared/Events.php [L]
+RewriteRule ^news$ pages/shared/News.php [L]
+
+
+
+
