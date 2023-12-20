@@ -76,9 +76,9 @@
                   <a href="<?= BASE_PATH ?>events"> Events</a>
                   <a href="<?= BASE_PATH ?>logout" class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300" href="">Logout </a>
                   <?php elseif(isset($_SESSION['admin'])) : ?>
-                    <a href="allStudents">All Students</a>
-                    <a href="allStudents">Enrol Student</a>
-                    <a href="allStudents">Pending Comments</a>                 
+                    <a href="<?= BASE_PATH ?>a/dashboard">Dashboard</a>
+                    <a href="<?= BASE_PATH ?>a/allStudents">All Students</a>
+                    <a href="<?= BASE_PATH ?>a/pending">Pending Comments</a>                 
                     <a href="<?= BASE_PATH ?>logout"
                     class="flex text-gray-600 hover:text-blue-500 cursor-pointer transition-colors duration-300" href="">
                     

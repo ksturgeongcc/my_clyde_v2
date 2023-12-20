@@ -33,7 +33,8 @@ RewriteRule ^s/comment$ pages/student/Comment.php [L]
 # admin Navigation
 RewriteRule ^a/dashboard$ pages/admin/Dashboard.php [L]
 RewriteRule ^a/allStudents$ pages/admin/AllStudents.php [L]
-# RewriteRule ^a/view/([0-9]+)$ pages/admin/edit_view_students.php?student_num=$1 [L]
+RewriteRule ^a/pending$ pages/admin/Pending.php [L]
+RewriteRule ^a/view/([0-9]+)$ pages/admin/edit_view_students.php?student_num=$1 [L]
 
 # shared
 RewriteRule ^events$ pages/shared/Events.php [L]
