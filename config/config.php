@@ -1,9 +1,15 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $hn = "localhost";
 $un = "student_admin";
-$pw = "xzg0ht-XQp!iWlty";
+// college password
+$pw = "jeSx@!W1euHa4Kvg";
+// $pw = "xzg0ht-XQp!iWlty";
 $db = "myclyde";
+
 
 $conn = new mysqli($hn, $un, $pw, $db);
 

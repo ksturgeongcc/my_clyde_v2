@@ -2,10 +2,39 @@
     $studentNum = $_GET['student_num'];
     include '../../config/config.php';
     include '../../partials/Header.php';
-    include '../../queries/student.php';
-    
+    $student = $conn->prepare("SELECT 
+    s.firstname,
+    s.surname,
+    s.email,
+    s.address,
+    s.postcode,
+    s.dob,
+    c.course_id,
+    c.name,
+    c.award,
+    c.year
+    FROM student s
+    INNER JOIN course c ON s.fk_course = c.course_id
 
-    echo $studentNum;
+    where s.student_num = $studentNum
+    ");
+    $student->execute();
+    $student->store_result();
+    $student->bind_result($firstname, $surname, $email, $address, $postcode, $dob, $course_id, $course, $award, $term);
+    $student->fetch();    
+
+
+// call all course names
+
+    $courseList = $conn->prepare("SELECT
+    course_id,
+    name
+    
+    from course");
+     $courseList->execute();
+     $courseList->store_result();
+     $courseList->bind_result($courseId, $courseName);
+      
     ?>
 
     <!-- component -->
@@ -38,19 +67,27 @@
                   <h1 class="inline text-2xl font-semibold leading-none">Student Details</h1>
                </div>
             </div>
+            <form action="../../queries/student_update.php?student_num=<?= $studentNum ?>" method="post">
             <div class="px-5 pb-5">
             <div class="flex">
-                  <div class="flex-grow w-1/4 pr-2"><input  value="firstname" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
-                  <div class="flex-grow"><input value="surname" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                  <div class="flex-grow w-1/4 pr-2"><input  name="firstname" value="<?= $firstname ?>" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                  <div class="flex-grow"><input name="surname" value="<?= $surname ?>" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
                </div>
-               <input  value="Student Number" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
-               <input  value="Email" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"> 
-               <input  value="Address" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"> 
+               <input  value="<?= $studentNum ?>" disabled class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+               <input  value="<?= $email ?>" name="email" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"> 
+               <input  value="<?= $address ?>" name="address" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"> 
                
                <div class="flex">
-                  <div class="flex-grow w-1/4 pr-2"><input  value="postcode" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
-                  <div class="flex-grow"><input value="date of birth" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                  <div class="flex-grow w-1/4 pr-2"><input name="postcode" value="<?= $postcode ?>" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
+                  <div class="flex-grow"><input disabled value="<?= $dob ?>" class=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"></div>
                </div>
+               <select name="fk_course" id="">
+                  <option value="<?= $course_id ?>"><?= $course ?></option>
+                  
+                  <?php while($courseList->fetch()) : ?>
+                     <option value="<?= $courseId ?>"><?= $courseName ?></option>
+                  <?php endwhile ?>
+               </select>
             </div>
             <div class="flex">
                <div class="flex-1 py-5 pl-5 overflow-hidden">
@@ -72,7 +109,7 @@
             <hr class="mt-4">
             <div class="flex flex-row-reverse p-3">
                <div class="flex-initial pl-3">
-                  <button type="button" class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
+                  <button type="submit" class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-800  focus:outline-none focus:bg-gray-900  transition duration-300 transform active:scale-95 ease-in-out">
                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
                         <path d="M0 0h24v24H0V0z" fill="none"></path>
                         <path d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z" opacity=".3"></path>
@@ -93,6 +130,7 @@
                </div>
             </div>
          </div>
+         </form>
       
       </div>
    </div>
