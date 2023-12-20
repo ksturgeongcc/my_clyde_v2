@@ -10,7 +10,7 @@ address = ?,
 postcode = ?,
 fk_course = ?
 
-where student_num = 12345678 ");
+where student_num = $studentNum  ");
 $updateStudent->bind_param('ssssss',$_POST['firstname'], $_POST['surname'], $_POST['email'], $_POST['address'], $_POST['postcode'], $_POST['fk_course']);
 
 $updateStudent->execute();
