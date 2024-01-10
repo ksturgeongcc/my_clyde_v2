@@ -7,7 +7,7 @@ session_start();
 $errorMessage = '';
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $conn->prepare('SELECT username, password FROM admin WHERE username = ?')) {
+if ($stmt = $conn->prepare('SELECT admin_id, username, password FROM admin WHERE username = ?')) {
     // Bind parameters (s = string, i = int, b = blob, etc), in our case the student_num is a string so we use "s"
     $stmt->bind_param('s', $_POST['username']);
     $stmt->execute();
@@ -15,7 +15,7 @@ if ($stmt = $conn->prepare('SELECT username, password FROM admin WHERE username 
     $stmt->store_result();
     // If the student_num exists 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($admin, $password);
+        $stmt->bind_result($id, $admin, $password);
         $stmt->fetch();
         // Account exists, now we verify the password.
         // Note: remember to use password_hash in your registration file to store the hashed passwords.
@@ -25,6 +25,7 @@ if ($stmt = $conn->prepare('SELECT username, password FROM admin WHERE username 
             session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['admin'] = $admin;
+            $_SESSION['id'] = $id;
 
            header('Location: ../a/dashboard');
 

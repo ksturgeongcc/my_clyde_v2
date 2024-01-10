@@ -76,5 +76,7 @@
         </div>
       </div>
   </section>
+  <?php include '../../partials/links.php'; ?>
 </section>
+
 <?php include '../../partials/footer.php'; ?>

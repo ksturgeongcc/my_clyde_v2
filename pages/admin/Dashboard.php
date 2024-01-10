@@ -1,3 +1,5 @@
-<?php include '../../partials/header.php'; ?>
+<?php 
+include '../../partials/header.php'; ?>
 
 admin dash
+

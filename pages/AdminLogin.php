@@ -20,7 +20,7 @@
         </div>
       <?php endif; ?>
 
-      <form action="config/authenticate_admin.php" method="post">
+      <form action="<?= BASE_PATH ?>config/authenticate_admin.php" method="post">
         <div class="mb-4 text-lg">
           <input class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="username" placeholder="20145874" />
         </div>

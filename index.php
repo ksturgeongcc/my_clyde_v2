@@ -195,7 +195,7 @@
     <section
         class="flex flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center"
         style="
-            background-image: url(https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80);
+            background-image: url(<?= BASE_PATH ?>assets/images/clyde.jpg)
         ">
         <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
             This is Parallax Effect
