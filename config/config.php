@@ -5,9 +5,7 @@ error_reporting(E_ALL);
 
 $hn = "localhost";
 $un = "student_admin";
-// college password
-// $pw = "jeSx@!W1euHa4Kvg";
-$pw = "xzg0ht-XQp!iWlty";
+$pw = "fAy(zy@[td14*-1!";
 $db = "myclyde";
 
 
