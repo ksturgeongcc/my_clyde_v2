@@ -28,7 +28,11 @@
             </tr>
           </thead>
           <tbody>
+
           <?php while ($course->fetch()): ?>
+            <?php if(!isset($course)) : ?>
+              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">You are not currently enrolled on any courses</tr>
+              <?php else : ?>
             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?= $unitName ?></td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -41,6 +45,8 @@
               <?= $enrolDate ?>
               </td>
             </tr>
+            <?php endif ?>
+
             <?php endwhile ?>
           </tbody>
         </table>

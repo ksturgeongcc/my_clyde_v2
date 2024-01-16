@@ -6,7 +6,7 @@
     se.date
     
     from student_enrolment se 
-    INNER JOIN unit u ON se.fk_unit = u.unit_id
+    LEFT JOIN unit u ON se.fk_unit = u.unit_id
     WHERE se.fk_student = $studentNum
     
     

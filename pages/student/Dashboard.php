@@ -53,10 +53,16 @@
               <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
                 <i class="fas fa-retweet"></i>
               </div>
-              <h6 class="text-xl font-semibold">My Course</h6>
+              <h6 class="text-xl font-semibold">My Course Details</h6>
+              <?php if(isset($course)) : ?>
               <p class="mt-2 mb-4 text-blueGray-500">
                 You are currently enrolled on <span class="text-red-600"><?= $course ?></span> for the term <?= $term ?> and working towards an <?= $award ?>
               </p>
+              <?php else : ?>
+                <p class="mt-2 mb-4 text-blueGray-500">
+                    Admin will update your course details soon.
+              </p>
+              <?php endif ?>
             </div>
           </div>
         </div>

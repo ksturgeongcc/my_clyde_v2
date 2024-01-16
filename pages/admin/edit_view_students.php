@@ -14,7 +14,7 @@
     c.award,
     c.year
     FROM student s
-    INNER JOIN course c ON s.fk_course = c.course_id
+    LEFT JOIN course c ON s.fk_course = c.course_id
 
     where s.student_num = $studentNum
     ");
@@ -41,7 +41,7 @@
 <div class="flex bg-gray-100">
    <div class="m-auto">
       <div>
-         <button type="button" class="relative w-full flex justify-center items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-900  focus:outline-none   transition duration-300 transform active:scale-95 ease-in-out">
+         <button onclick="window.location.href='<?= BASE_PATH ?>queries/deleteStudent.php?student_num=<?= $studentNum ?>';"  type="button" class="relative w-full flex justify-center items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-black rounded-md hover:bg-gray-900  focus:outline-none   transition duration-300 transform active:scale-95 ease-in-out">
             <svg class="h-8 w-8 text-red-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6"/></svg>
             <span class="pl-2 mx-1">Delete Student</span>
